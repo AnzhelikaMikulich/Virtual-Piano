@@ -42,9 +42,6 @@ function playNote(event) {
 	let note = document.getElementById(key.dataset.note);
 	note.currentTime = 0;
 	note.play();
-	note.addEventListener('ended', () => {
-		key.classList.remove('piano-key-active');
-	});
 }
 
 window.addEventListener('keydown', playNoteKeyboard);
@@ -53,9 +50,10 @@ function playNoteKeyboard(e) {
 	console.log(e.keyCode);
 	let note = document.querySelector(`audio[data-key="${e.keyCode}"]`);
 	let key = document.querySelector(`.piano-key[data-key="${e.keyCode}"]`);
-    if (!key) return;
+	if (!key) return;
 	console.log(key);
 	key.classList.add('piano-key-active');
+    if(e.repeat) return true;
 	note.currentTime = 0;
 	note.play();
 	note.addEventListener('ended', () => {
@@ -64,22 +62,18 @@ function playNoteKeyboard(e) {
 }
 
 pianoKey.forEach((key) => {
-	key.addEventListener('mousedown', playNoteMovingMouse);
+	key.addEventListener('mouseover', playNoteMovingMouse);
 });
 
-function playNoteMovingMouse(event){
-    console.log(event.which)
-    if(event.which==1){
-        let key = event.target;
-	key.classList.add('piano-key-active');
-	let note = document.getElementById(key.dataset.note);
-	note.currentTime = 0;
-	note.play();
-	note.addEventListener('ended', () => {
-		key.classList.remove('piano-key-active');
-	}); 
-    }
-   
-    
-
+function playNoteMovingMouse(event) {
+	if (event.which == 1&& event.target.classList.contains('piano-key')) {
+		let key = event.target;
+		key.classList.add('piano-key-active');
+		let note = document.getElementById(key.dataset.note);
+		note.currentTime = 0;
+		note.play();
+		note.addEventListener('ended', () => {
+			key.classList.remove('piano-key-active');
+		});
+	}
 }

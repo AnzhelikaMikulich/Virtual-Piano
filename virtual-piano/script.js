@@ -42,6 +42,9 @@ function playNote(event) {
 	let note = document.getElementById(key.dataset.note);
 	note.currentTime = 0;
 	note.play();
+    note.addEventListener('ended', () => {
+        key.classList.remove('piano-key-active');
+    });
 }
 
 window.addEventListener('keydown', playNoteKeyboard);

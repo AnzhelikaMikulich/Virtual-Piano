@@ -141,10 +141,12 @@ body {
 	bottom: -45px;
 	left: 20px;
 	transition: 0.3s;
+	pointer-events: none;
 }
 .piano-key::after {
 	display: none;
 	content: attr(data-letter);
+	pointer-events: none;
 }
 .piano-key:hover::before,
 .piano-key:hover::after {
@@ -168,6 +170,7 @@ body {
 }
 .piano-key-letter::before {
 	content: attr(data-letter);
+	pointer-events: none;
 }
 
 .piano-key-remove-mouse:active::before {

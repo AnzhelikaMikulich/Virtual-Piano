@@ -121,7 +121,15 @@ body {
 .piano-key.piano-key-active,
 .piano-key.sharp.piano-key-active {
 	transform: scale(0.96);
+	background-color: #00c9b7;
+	transition: ease-out 0.3s;
 }
+.piano-key.sharp.piano-key-active{
+	background-color: #313940;
+	opacity: 0.9;
+	
+}
+
 .piano-key.none {
 	background-color: transparent;
 	border: 0;

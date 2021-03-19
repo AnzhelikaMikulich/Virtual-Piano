@@ -33,17 +33,16 @@ function changeLetters() {
 	}
 }
 
-
 piano.addEventListener('mousedown', playNote);
 
 function playNote(event) {
 	let key = event.target;
-	key.classList.add('piano-key-active','piano-key-active-pseudo');
+	key.classList.add('piano-key-active', 'piano-key-active-pseudo');
 	let note = document.getElementById(key.dataset.note);
 	note.currentTime = 0;
 	note.play();
-	key.addEventListener('mouseup',() => {
-		key.classList.remove('piano-key-active','piano-key-active-pseudo');
+	key.addEventListener('mouseup', () => {
+		key.classList.remove('piano-key-active', 'piano-key-active-pseudo');
 	});
 }
 
@@ -54,28 +53,34 @@ function playNoteKeyboard(e) {
 	let key = document.querySelector(`.piano-key[data-key="${e.keyCode}"]`);
 	if (!key) return;
 	key.classList.add('piano-key-active');
-    if(e.repeat) return true;
+	if (e.repeat) return true;
 	note.currentTime = 0;
 	note.play();
 	note.addEventListener('ended', () => {
 		key.classList.remove('piano-key-active');
 	});
-	
 }
 
+let mouseClicked = false;
+piano.addEventListener('mousedown', () => {
+	mouseClicked = true;
+});
+piano.addEventListener('mouseup', () => {
+	mouseClicked = false;
+});
 
-piano.addEventListener('mouseover', playNoteMovingMouse);
-
-
-function playNoteMovingMouse(event) {
-	 if (event.which == 1&& event.target.classList.contains('piano-key')) {
+piano.addEventListener('mouseover', (event) => {
+	if (mouseClicked && event.target.classList.contains('piano-key') && event.which == 1) {
 		let key = event.target;
-		key.classList.add('piano-key-active','piano-key-active-pseudo');
+		key.classList.add('piano-key-active', 'piano-key-active-pseudo');
 		let note = document.getElementById(key.dataset.note);
 		note.currentTime = 0;
 		note.play();
-		key.addEventListener('mouseout', () => {
-			key.classList.remove('piano-key-active','piano-key-active-pseudo');
-		});
 	}
-}
+});
+
+piano.addEventListener('mouseout', (event) => {
+	if (event.target.classList.contains('piano-key')) {
+		event.target.classList.remove('piano-key-active', 'piano-key-active-pseudo');
+	}
+});

@@ -56,7 +56,7 @@ function playNoteKeyboard(e) {
 	if (e.repeat) return true;
 	note.currentTime = 0;
 	note.play();
-	note.addEventListener('ended', () => {
+	key.addEventListener("transitionend", () => {
 		key.classList.remove('piano-key-active');
 	});
 }

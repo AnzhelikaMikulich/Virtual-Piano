@@ -47,6 +47,12 @@ function playNote(event) {
 }
 
 window.addEventListener('keydown', playNoteKeyboard);
+window.addEventListener('keyup', (e) => {
+	let key = document.querySelector(`.piano-key[data-key="${e.keyCode}"]`);
+	if (key.classList.contains('piano-key-active')) {
+		key.classList.remove('piano-key-active', 'piano-key-active-pseudo');
+	}
+});
 
 function playNoteKeyboard(e) {
 	let note = document.querySelector(`audio[data-key="${e.keyCode}"]`);
@@ -56,16 +62,13 @@ function playNoteKeyboard(e) {
 	if (e.repeat) return true;
 	note.currentTime = 0;
 	note.play();
-	key.addEventListener("transitionend", () => {
-		key.classList.remove('piano-key-active');
-	});
 }
 
 let mouseClicked = false;
 piano.addEventListener('mousedown', () => {
 	mouseClicked = true;
 });
-piano.addEventListener('mouseup', () => {
+document.addEventListener('mouseup', () => {
 	mouseClicked = false;
 });
 

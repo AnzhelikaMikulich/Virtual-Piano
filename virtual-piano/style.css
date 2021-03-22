@@ -89,6 +89,7 @@ body {
 	width: 80px;
 	height: 270px;
 	background-color: rgba(255, 255, 255, 0.85);
+	
 	margin: 4px;
 	border-radius: 0px 0px 12px 12px;
 	transition: 0.3s;

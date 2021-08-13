@@ -46,3 +46,21 @@ function playNote(event) {
 		key.classList.remove('piano-key-active', 'piano-key-active-pseudo');
 	});
 }
+
+window.addEventListener('keydown', playNoteKeyboard);
+window.addEventListener('keyup', (e) => {
+	let key = document.querySelector(`.piano-key[data-key="${e.keyCode}"]`);
+	if (key.classList.contains('piano-key-active')) {
+		key.classList.remove('piano-key-active', 'piano-key-active-pseudo');
+	}
+});
+
+function playNoteKeyboard(e) {
+	let note = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+	let key = document.querySelector(`.piano-key[data-key="${e.keyCode}"]`);
+	if (!key) return;
+	key.classList.add('piano-key-active');
+	if (e.repeat) return true;
+	note.currentTime = 0;
+	note.play();
+}

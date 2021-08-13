@@ -64,3 +64,19 @@ function playNoteKeyboard(e) {
 	note.currentTime = 0;
 	note.play();
 }
+
+piano.addEventListener('mouseover', (event) => {
+	if (mouseClicked && event.target.classList.contains('piano-key') && event.which == 1) {
+		let key = event.target;
+		key.classList.add('piano-key-active', 'piano-key-active-pseudo');
+		let note = document.getElementById(key.dataset.note);
+		note.currentTime = 0;
+		note.play();
+	}
+});
+
+piano.addEventListener('mouseout', (event) => {
+	if (event.target.classList.contains('piano-key')) {
+		event.target.classList.remove('piano-key-active', 'piano-key-active-pseudo');
+	}
+});

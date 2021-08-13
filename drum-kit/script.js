@@ -33,3 +33,16 @@ function changeLetters() {
 		pianoKey[i].classList.add('piano-key-letter');
 	}
 }
+
+piano.addEventListener('mousedown', playNote);
+
+function playNote(event) {
+	let key = event.target;
+	key.classList.add('piano-key-active', 'piano-key-active-pseudo');
+	let note = document.getElementById(key.dataset.note);
+	note.currentTime = 0;
+	note.play();
+	key.addEventListener('mouseup', () => {
+		key.classList.remove('piano-key-active', 'piano-key-active-pseudo');
+	});
+}

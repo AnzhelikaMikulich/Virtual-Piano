@@ -65,6 +65,14 @@ function playNoteKeyboard(e) {
 	note.play();
 }
 
+let mouseClicked = false;
+piano.addEventListener('mousedown', () => {
+	mouseClicked = true;
+});
+document.addEventListener('mouseup', () => {
+	mouseClicked = false;
+});
+
 piano.addEventListener('mouseover', (event) => {
 	if (mouseClicked && event.target.classList.contains('piano-key') && event.which == 1) {
 		let key = event.target;

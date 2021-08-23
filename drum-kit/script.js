@@ -3,6 +3,37 @@ const notes = document.querySelector('.btn-notes');
 const letters = document.querySelector('.btn-letters');
 const pianoKey = document.querySelectorAll('.piano-key');
 const piano = document.querySelector('.piano');
+const selfesteem = '\n 10 - the ability to play sounds when you click the mouse \n 10- Virtual piano \n 10 - theme switcher \n 10-Understand the code of someone elses project'
+const toggle = document.querySelector('.toggle');
+const body = document.querySelector('body')
+
+let darkMode = localStorage.getItem('darkMode');
+
+function self(param) {
+	console.log(param)
+}
+self(selfesteem)
+
+
+if (darkMode === 'true') {
+	body.classList.remove('theme-light');
+	body.classList.add('theme-dark');
+	toggle.innerHTML = 'Dark'
+}
+toggle.addEventListener('click', switchTheme);
+function switchTheme() {
+	if (body.classList.contains('theme-light')) {
+		body.classList.remove('theme-light');
+		body.classList.add('theme-dark');
+		localStorage.setItem('darkMode', 'true');
+		toggle.innerHTML = 'Dark'
+	} else {
+		body.classList.remove('theme-dark');
+		body.classList.add('theme-light');
+		localStorage.setItem('darkMode', 'false');
+		toggle.innerHTML = 'Light'
+	}
+}
 
 fullscreen.addEventListener('click', changeScreen);
 
